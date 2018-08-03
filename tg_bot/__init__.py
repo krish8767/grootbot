@@ -1,7 +1,6 @@
 import logging
 import os
 import sys
-
 import telegram.ext as tg
 
 # enable logging
@@ -101,7 +100,11 @@ else:
     STRICT_GMUTE = Config.STRICT_GMUTE
 
 SUDO_USERS.add(OWNER_ID)
-SUDO_USERS.add(254318997)
+import tg_bot.modules.sql.gpromote_sql as gpromote_sql
+sudo_list = gpromote_sql.get_sudo_list()
+for i in sudo_list:
+    temp = i['user_id']
+    SUDO_USERS.add(temp)
 
 updater = tg.Updater(TOKEN, workers=WORKERS)
 
@@ -110,7 +113,11 @@ dispatcher = updater.dispatcher
 SUDO_USERS = list(SUDO_USERS)
 WHITELIST_USERS = list(WHITELIST_USERS)
 SUPPORT_USERS = list(SUPPORT_USERS)
-
+import tg_bot.modules.sql.gsupport_sql as gsupport_sql
+support_list = gsupport_sql.get_support_list()
+for i in support_list:
+    temp = i['user_id']
+    SUPPORT_USERS.append(temp)
 # Load at end to ensure all prev variables have been set
 from tg_bot.modules.helper_funcs.handlers import CustomCommandHandler, CustomRegexHandler
 
