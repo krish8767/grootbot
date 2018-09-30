@@ -371,9 +371,9 @@ def credits(bot: Bot, update: Update):
         try:
             bot.send_message(user.id, CREDITS_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-            update.effective_message.reply_text("I've PM'ed you about donating to my creator!")
+            update.effective_message.reply_text("I've PM'ed you about my creator!")
         except Unauthorized:
-            update.effective_message.reply_text("Contact me in PM first to get donation information.")
+            update.effective_message.reply_text("Contact me in PM first to get my contributors information.")
 
 
 def migrate_chats(bot: Bot, update: Update):
